@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { BASE_URL } from "./apis";
 
 export const deepResearchApi = createApi({
   reducerPath: 'deepResearchApi',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: "/api",
+    baseUrl: `${BASE_URL}/api`,
     credentials: 'include',
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
@@ -18,7 +19,7 @@ export const deepResearchApi = createApi({
   endpoints: (builder) => ({
     submitLegalResearch: builder.mutation({
       query: (formData) => ({
-        url: "/deepresearch/structured-research/legal",
+        url: " /deepresearch/structured-research/legal",
         method: 'POST',
         body: formData,
       }),
