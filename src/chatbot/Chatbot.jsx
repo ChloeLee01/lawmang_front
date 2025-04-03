@@ -8,6 +8,8 @@ import { IoIosSend } from "react-icons/io";
 import { IoMdPause } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 
+import { BASE_URL } from "../redux/slices/apis";
+
 const Chatbot = () => {
   const navigate = useNavigate();
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -117,7 +119,8 @@ const Chatbot = () => {
       try {
         // ✅ LLM1 - 초기 응답 먼저 받음
 
-        const res = await fetch("/api/chatbot/chat", {
+        // const res = await fetch("/api/chatbot/chat", {
+          const res = await fetch(`${BASE_URL}/api/chatbot/chat`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -188,7 +191,7 @@ const Chatbot = () => {
 
         // ✅ LLM2 prepare는 백그라운드에서 실행
         if (initial.yes_count >= 1 && initial.yes_count < 3) {
-          fetch("/api/chatbot/prepare", {
+          fetch(`${BASE_URL}/api/chatbot/prepare`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ query: userInput }),
@@ -197,7 +200,7 @@ const Chatbot = () => {
 
         // ✅ LLM2 advanced도 백그라운드에서 실행 → 응답 오면 메시지 추가
         if (initial.yes_count >= 3) {
-          fetch("/api/chatbot/advanced", {
+          fetch(`${BASE_URL}/api/chatbot/advanced`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ query: userInput }),
@@ -258,7 +261,7 @@ const Chatbot = () => {
       setIsLegalTyping(true);
       try {
         const response = await axios.post(
-          "/api/chatbot_term/legal-term",
+          `${BASE_URL}/api/chatbot_term/legal-term`,
           { question: userInput }
         );
         const result = response.data.result;
