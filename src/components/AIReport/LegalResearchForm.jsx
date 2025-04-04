@@ -24,12 +24,40 @@ const LegalResearchForm = ({ setIsLoading }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // formData 유효성 검사 및 데이터 가공
+    const processedFormData = {
+      case_type: formData.case_type.trim(),
+      incident_date: formData.incident_date,
+      related_party: formData.related_party.trim(),
+      fact_details: formData.fact_details.trim(),
+      evidence: formData.evidence.trim(),
+      prior_action: formData.prior_action.trim(),
+      desired_result: formData.desired_result.trim(),
+    };
+
+    // 데이터 검증
+    if (
+      !processedFormData.case_type ||
+      !processedFormData.incident_date ||
+      !processedFormData.related_party ||
+      !processedFormData.fact_details ||
+      !processedFormData.evidence ||
+      !processedFormData.prior_action ||
+      !processedFormData.desired_result
+    ) {
+      alert("모든 필드를 입력해주세요.");
+      return;
+    }
+
     try {
-      const response = await submitLegalResearch(formData).unwrap();
+      console.log("전송할 데이터:", processedFormData); // 디버깅용
+      const response = await submitLegalResearch(processedFormData).unwrap();
+      console.log("응답:", response); // 디버깅용
       setResult(response);
     } catch (error) {
       console.error("Error:", error);
-      alert("보고서 생성 중 오류가 발생했습니다.");
+      alert(error.data?.message || "보고서 생성 중 오류가 발생했습니다.");
     }
   };
 
