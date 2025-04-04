@@ -19,7 +19,7 @@ export const deepResearchApi = createApi({
   endpoints: (builder) => ({
     submitLegalResearch: builder.mutation({
       query: (formData) => ({
-        url: " /deepresearch/structured-research/legal",
+        url: "/deepresearch/structured-research/legal",
         method: 'POST',
         body: formData,
       }),
