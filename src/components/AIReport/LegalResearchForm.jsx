@@ -51,13 +51,32 @@ const LegalResearchForm = ({ setIsLoading }) => {
     }
 
     try {
-      console.log("전송할 데이터:", processedFormData); // 디버깅용
+      // 요청 시작 시간 기록
+      console.log("요청 시작:", new Date().toISOString());
+      console.log("전송하는 데이터:", processedFormData);
+
       const response = await submitLegalResearch(processedFormData).unwrap();
-      console.log("응답:", response); // 디버깅용
+
+      // 응답 받은 시간 기록
+      console.log("응답 수신:", new Date().toISOString());
+      console.log("응답 데이터:", response);
+
       setResult(response);
     } catch (error) {
-      console.error("Error:", error);
-      alert(error.data?.message || "보고서 생성 중 오류가 발생했습니다.");
+      // 자세한 에러 정보 출력
+      console.error("에러 발생 시각:", new Date().toISOString());
+      console.error("에러 타입:", error.name);
+      console.error("에러 메시지:", error.message);
+      console.error("전체 에러 객체:", error);
+
+      // 사용자에게 더 자세한 에러 메시지 표시
+      alert(
+        error.status === 408
+          ? "요청 시간이 초과되었습니다."
+          : error.data?.message ||
+              error.error ||
+              "보고서 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
+      );
     }
   };
 
