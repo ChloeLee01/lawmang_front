@@ -61,11 +61,13 @@ const Main = () => {
 
           {/* 메인 문구 */}
           <div className="fixed bottom-[125px] left-[50px] 2xl:left-[150px] z-20 text-white">
-            <h1 className="text-6xl font-bold mb-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-10">
               법망 안의 새로운 시작
               <br />
             </h1>
-            <p className="text-3xl text-gray-300">당신의 법률 파트너, 로망</p>
+            <p className="text-2xl sm:text-2xl md:text-3xl text-gray-300">
+              당신의 법률 파트너, 로망
+            </p>
           </div>
 
           {/* 스크롤 유도 애니메이션 */}

@@ -122,12 +122,12 @@ const Header = () => {
           isScrolled ? "bg-white/80 backdrop-blur-sm shadow-md" : ""
         } ${isModalOpen ? "z-[30]" : "z-[100]"}`}
       >
-        <div className="px-20 w-full h-[100px] flex items-center justify-between">
+        <div className="px-4 sm:px-20 w-full h-[100px] flex items-center justify-between">
           {/* Lawmang 로고 */}
           <div className="relative z-10 mb-4 pt-2">
             <Link
               to="/"
-              className={`${textColorClass} text-5xl font-normal font-['Oswald']`}
+              className={`${textColorClass} text-3xl sm:text-4xl md:text-5xl font-normal font-['Oswald']`}
             >
               Lawmang
             </Link>
