@@ -120,7 +120,7 @@ const Chatbot = () => {
         // ✅ LLM1 - 초기 응답 먼저 받음
 
         // const res = await fetch("/api/chatbot/chat", {
-          const res = await fetch(`${BASE_URL}/api/chatbot/chat`, {
+        const res = await fetch(`${BASE_URL}/api/chatbot/chat`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -311,27 +311,27 @@ const Chatbot = () => {
       <div
         className={`${
           isOpen ? "block max-[1380px]:block" : "hidden max-[1380px]:hidden"
-        } min-[1380px]:block fixed right-[100px] 2xl:right-[170px] top-[55%] -translate-y-1/2 ${
+        } min-[1380px]:block fixed sm:right-[100px] 2xl:right-[170px] sm:top-[55%] sm:-translate-y-1/2 h-screen w-screen sm:h-auto sm:w-auto flex items-center justify-center ${
           isMemoModalOpen ? "z-[100]" : "z-40"
         }`}
       >
-        <div className="w-[500px] h-[600px] 2xl:w-[600px] 2xl:h-[770px] bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.2)] flex flex-col relative">
+        <div className="w-[85%] h-[80%] sm:w-[500px] sm:h-[600px] 2xl:w-[600px] 2xl:h-[770px] bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.2)] flex flex-col relative text-sm sm:text-base translate-y-[20%] translate-x-[8%] sm:translate-x-0 sm:translate-y-0">
           {showLoginPopup && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-white rounded-lg p-6 shadow-2xl">
-                <p className="text-center text-lg mb-6">
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-2xl">
+                <p className="text-center text-base sm:text-lg mb-4 sm:mb-6">
                   법률용어 검색은 로그인이 필요합니다.
                 </p>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowLoginPopup(false)}
-                    className="flex-1 bg-gray-200 py-2 rounded-lg"
+                    className="flex-1 bg-gray-200 py-1 sm:py-2 rounded-lg text-sm sm:text-base"
                   >
                     닫기
                   </button>
                   <button
                     onClick={handleLoginClick}
-                    className="flex-1 bg-Main text-white py-2 rounded-lg"
+                    className="flex-1 bg-Main text-white py-1.5 sm:py-2 rounded-lg text-sm sm:text-base"
                   >
                     로그인
                   </button>
@@ -340,15 +340,17 @@ const Chatbot = () => {
             </div>
           )}
 
-          <div className="p-6 bg-Main text-white rounded-t-xl">
-            <h3 className="text-2xl  font-['Oswald']">Lawmang 챗봇</h3>
+          <div className="p-4 sm:p-6 bg-Main text-white rounded-t-xl">
+            <h3 className="text-xl sm:text-2xl font-['Oswald']">
+              Lawmang 챗봇
+            </h3>
           </div>
 
-          <div className="flex justify-between p-4 border-b">
-            <div className="flex gap-2 items-center">
+          <div className="flex justify-between p-3 sm:p-4 border-b">
+            <div className="flex gap-1 sm:gap-2 items-center">
               <button
                 onClick={() => handleCategoryClick("general")}
-                className={`px-4 py-2 rounded-lg whitespace-nowrap ${
+                className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg whitespace-nowrap text-sm sm:text-base ${
                   selectedCategory === "general"
                     ? "bg-Main text-white"
                     : "bg-gray-100"
@@ -359,7 +361,7 @@ const Chatbot = () => {
 
               <button
                 onClick={() => handleCategoryClick("legal")}
-                className={`px-4 py-2 rounded-lg transition-colors whitespace-nowrap ${
+                className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-colors whitespace-nowrap text-sm sm:text-base ${
                   selectedCategory === "legal"
                     ? "bg-Main text-white"
                     : "bg-gray-100 hover:bg-gray-200"
@@ -370,7 +372,7 @@ const Chatbot = () => {
                 법률용어
               </button>
               {selectedCategory === "general" && (
-                <p className="text-xs 2xl:text-sm text-gray-500 ml-2 mt-2 break-keep self-center">
+                <p className="text-[10px] sm:text-xs 2xl:text-sm text-gray-500 ml-1 sm:ml-2 mt-1 sm:mt-2 break-keep self-center">
                   ※ '법률용어' 풀이가 필요한 경우 로그인 후 이용 가능합니다.
                 </p>
               )}
@@ -378,14 +380,14 @@ const Chatbot = () => {
           </div>
 
           {/* 챗봇 메시지 영역 */}
-          <div className="messages-container flex-1 py-6 pr-6 pl-0 overflow-y-auto">
+          <div className="messages-container flex-1 py-4 sm:py-6 pr-4 sm:pr-6 pl-0 overflow-y-auto">
             {currentMessages.map((msg, index) => (
               <div
                 key={index}
-                className={`mb-4 ${
+                className={`mb-3 sm:mb-4 ${
                   msg.isUser
                     ? "flex justify-end pr-0"
-                    : "flex items-start gap-4 pl-4"
+                    : "flex items-start gap-2 sm:gap-4 pl-3 sm:pl-4"
                 }`}
               >
                 {/* 챗봇 프로필 이미지 */}
@@ -393,7 +395,7 @@ const Chatbot = () => {
                   <img
                     src={Logo}
                     alt="Lawmang 로고"
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0 sticky top-0"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover flex-shrink-0 sticky top-0"
                   />
                 )}
                 <div
@@ -401,7 +403,7 @@ const Chatbot = () => {
                     msg.isUser
                       ? "bg-[#a7a28f] text-white relative before:content-[''] before:absolute before:right-0 before:top-4 before:translate-x-[99%] before:border-y-[5px] before:border-r-0 before:border-l-[8px] before:border-transparent before:border-l-[#a7a28f]"
                       : "bg-gray-200 text-black relative before:content-[''] before:absolute before:left-0 before:top-4 before:-translate-x-[99%] before:border-y-[5px] before:border-l-0 before:border-r-[8px] before:border-transparent before:border-r-gray-200"
-                  } px-4 py-2 rounded-xl max-w-[80%] relative break-words whitespace-pre-line`}
+                  } px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl max-w-[80%] relative break-words whitespace-pre-line text-sm sm:text-base`}
                 >
                   {msg.text}
                 </div>
@@ -488,7 +490,7 @@ const Chatbot = () => {
           </div>
 
           {/* 1380px 이하에서 닫기 버튼 */}
-          <div className="max-[1380px]:block hidden absolute top-5 right-4 hover:bg-Main_hover transition-colors rounded-full">
+          <div className="max-[1380px]:block hidden absolute top-3 right-2 hover:bg-Main_hover transition-colors rounded-full">
             <button
               onClick={() => setIsOpen(false)}
               className="p-2 rounded-full text-white"
