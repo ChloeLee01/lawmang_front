@@ -5,16 +5,21 @@ export const deepResearchApi = createApi({
   reducerPath: "deepResearchApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/api`,
-    credentials: "include",
+    // credentials: "include",
+    // prepareHeaders: (headers) => {
+    //   const token = localStorage.getItem("token");
+    //   if (token) {
+    //     headers.set("authorization", `Bearer ${token}`);
+    //   }
+    //   headers.set("Content-Type", "application/json");
+    //   headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    //   headers.set("Pragma", "no-cache");
+    //   headers.set("Expires", "0");
+    //   return headers;
+    // },
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
       headers.set("Content-Type", "application/json");
-      headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
-      headers.set("Pragma", "no-cache");
-      headers.set("Expires", "0");
+      // 캐시 관련 헤더도 제거
       return headers;
     },
     timeout: 600000,

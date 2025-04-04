@@ -24,59 +24,12 @@ const LegalResearchForm = ({ setIsLoading }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // formData 유효성 검사 및 데이터 가공
-    const processedFormData = {
-      case_type: formData.case_type.trim(),
-      incident_date: formData.incident_date,
-      related_party: formData.related_party.trim(),
-      fact_details: formData.fact_details.trim(),
-      evidence: formData.evidence.trim(),
-      prior_action: formData.prior_action.trim(),
-      desired_result: formData.desired_result.trim(),
-    };
-
-    // 데이터 검증
-    if (
-      !processedFormData.case_type ||
-      !processedFormData.incident_date ||
-      !processedFormData.related_party ||
-      !processedFormData.fact_details ||
-      !processedFormData.evidence ||
-      !processedFormData.prior_action ||
-      !processedFormData.desired_result
-    ) {
-      alert("모든 필드를 입력해주세요.");
-      return;
-    }
-
     try {
-      // 요청 시작 시간 기록
-      console.log("요청 시작:", new Date().toISOString());
-      console.log("전송하는 데이터:", processedFormData);
-
-      const response = await submitLegalResearch(processedFormData).unwrap();
-
-      // 응답 받은 시간 기록
-      console.log("응답 수신:", new Date().toISOString());
-      console.log("응답 데이터:", response);
-
+      const response = await submitLegalResearch(formData).unwrap();
       setResult(response);
     } catch (error) {
-      // 자세한 에러 정보 출력
-      console.error("에러 발생 시각:", new Date().toISOString());
-      console.error("에러 타입:", error.name);
-      console.error("에러 메시지:", error.message);
-      console.error("전체 에러 객체:", error);
-
-      // 사용자에게 더 자세한 에러 메시지 표시
-      alert(
-        error.status === 408
-          ? "요청 시간이 초과되었습니다."
-          : error.data?.message ||
-              error.error ||
-              "보고서 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
-      );
+      console.error("Error:", error);
+      alert("보고서 생성 중 오류가 발생했습니다.");
     }
   };
 
