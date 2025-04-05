@@ -46,9 +46,9 @@ const TaxResearchForm = ({ setIsLoading }) => {
         `}
       </style>
       <div className="w-full max-w-3xl mx-auto">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               신고 유형
             </label>
             <input
@@ -57,14 +57,14 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, report_type: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 종합소득세, 부가가치세 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               신고 대상 기간
             </label>
             <input
@@ -73,14 +73,14 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, report_period: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 2023년 귀속, 2024년 1기 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               소득/사업 유형
             </label>
             <input
@@ -89,14 +89,14 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, income_type: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 프리랜서, 개인사업자 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               걱정되는 점
             </label>
             <textarea
@@ -104,14 +104,14 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, concern: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-32 resize-none"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base"
               placeholder="세무 신고시 우려되는 사항을 설명해주세요"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               원하는 신고 목표
             </label>
             <input
@@ -120,14 +120,14 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, desired_result: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 적절한 공제 적용, 세금 최적화 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               추가 참고 사항
             </label>
             <textarea
@@ -135,7 +135,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, additional_info: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-32 resize-none"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base"
               placeholder="기타 참고할 만한 사항을 자유롭게 작성해주세요"
             />
           </div>
@@ -144,7 +144,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full p-4 text-white rounded-lg transition-colors ${
+              className={`w-full p-3 md:p-4 text-white rounded-lg transition-colors ${
                 isLoading
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-Main hover:bg-Main_hover"
@@ -153,12 +153,12 @@ const TaxResearchForm = ({ setIsLoading }) => {
               {isLoading ? "분석 중..." : "세무 검토 요청"}
             </button>
             {isLoading && (
-              <div className="flex items-center justify-center gap-2 mt-6">
-                <p className="text-sm text-gray-500">
+              <div className="flex items-center justify-center gap-2 mt-4 md:mt-6">
+                <p className="text-xs md:text-sm text-gray-500">
                   약 1~2분 정도의 시간이 소요될 수 있습니다.
                 </p>
                 <svg
-                  className="w-5 h-5 text-Main loading-icon"
+                  className="w-4 h-4 md:w-5 md:h-5 text-Main loading-icon"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

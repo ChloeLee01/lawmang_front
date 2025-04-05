@@ -50,9 +50,9 @@ const LegalResearchForm = ({ setIsLoading }) => {
         `}
       </style>
       <div className="w-full max-w-3xl mx-auto">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               사건 유형
             </label>
             <input
@@ -61,14 +61,14 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, case_type: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 임대차 분쟁, 손해배상 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               사건 발생 시점
             </label>
             <input
@@ -78,13 +78,13 @@ const LegalResearchForm = ({ setIsLoading }) => {
                 setFormData({ ...formData, incident_date: e.target.value })
               }
               max={new Date().toISOString().split("T")[0]}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main "
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               관련자
             </label>
             <input
@@ -93,14 +93,14 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, related_party: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 건물주, 거래처 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               사실관계
             </label>
             <textarea
@@ -108,14 +108,14 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, fact_details: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-32 resize-none"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base"
               placeholder="사건의 경위를 상세히 설명해주세요"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               확보한 증거
             </label>
             <input
@@ -124,14 +124,14 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, evidence: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 계약서, 영수증, 녹취록 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               기존 대응 여부
             </label>
             <input
@@ -140,14 +140,14 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, prior_action: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 내용증명 발송, 유선상 합의 시도 등"
               required
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">
+            <label className="block text-sm md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
               원하는 해결 방향
             </label>
             <input
@@ -156,7 +156,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, desired_result: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
               placeholder="예: 보증금 전액 반환, 손해배상 등"
               required
             />
@@ -166,7 +166,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full p-4 text-white rounded-lg transition-colors ${
+              className={`w-full p-3 md:p-4 text-white rounded-lg transition-colors ${
                 isLoading
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-Main hover:bg-Main_hover"
@@ -174,14 +174,14 @@ const LegalResearchForm = ({ setIsLoading }) => {
             >
               {isLoading ? "분석 중..." : "법률 검토 요청"}
             </button>
-            <div className="flex items-center justify-center gap-2 mt-8">
+            <div className="flex items-center justify-center gap-2 mt-4 md:mt-8">
               {isLoading ? (
                 <>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-xs md:text-sm text-gray-500">
                     약 1~2분 정도의 시간이 소요될 수 있습니다.
                   </p>
                   <svg
-                    className="w-5 h-5 text-Main loading-icon"
+                    className="w-4 h-4 md:w-5 md:h-5 text-Main loading-icon"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -197,7 +197,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               ) : result ? (
                 <>
                   <svg
-                    className="w-5 h-5 text-green-500"
+                    className="w-4 h-4 md:w-5 md:h-5 text-green-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -209,7 +209,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <p className="text-sm font-semibold text-gray-700">
+                  <p className="text-xs md:text-sm font-semibold text-gray-700">
                     작성이 완료되었습니다! 아래의 내용을 확인해주세요.
                   </p>
                 </>
