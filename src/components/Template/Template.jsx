@@ -194,13 +194,13 @@ const Template = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={scrollLeft}
-                className="absolute left-0 top-1/2 -translate-y-2/3 bg-white/80 hover:bg-white p-1 rounded-full shadow-md sm:hidden"
+                className="absolute left-0 top-1/2 -translate-y-2/3 bg-white/80 hover:bg-white p-1 rounded-full shadow-md sm:hidden "
               >
                 <IoIosArrowBack className="w-4 h-4 text-gray-600" />
               </button>
               <div
                 ref={categoryContainerRef}
-                className="flex-1 overflow-x-auto scrollbar-hide sm:overflow-visible"
+                className="flex-1 overflow-x-auto scrollbar-hide sm:overflow-visible "
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 <div className="flex gap-1.5 sm:gap-2 whitespace-nowrap sm:flex-wrap sm:whitespace-normal">
@@ -209,8 +209,8 @@ const Template = () => {
                       key={key}
                       onClick={() => handleCategoryClick(key)}
                       className={`px-2 sm:px-3 py-1 sm:py-1.5 border rounded-lg transition-colors duration-200
-                        min-w-[80px] sm:min-w-[100px] text-center text-xs sm:text-sm
-                        whitespace-normal break-words
+                        min-w-fit sm:min-w-[100px] text-center text-xs sm:text-sm
+                        whitespace-nowrap
                         ${
                           selectedCategory === key
                             ? "bg-Main text-white border-Main"

@@ -261,7 +261,7 @@ const Consultation = () => {
                   key={category}
                   onClick={() => handleCategorySelect(category)}
                   className={`px-2 sm:px-3 py-1 sm:py-1.5 border rounded-lg transition-colors duration-200
-                    min-w-[80px] sm:min-w-[100px] text-center text-xs sm:text-sm whitespace-normal
+                    min-w-fit sm:min-w-[100px] text-center text-xs sm:text-sm whitespace-nowrap
                     ${
                       selectedCategory === category
                         ? "bg-Main text-white border-Main"
