@@ -220,16 +220,26 @@ const LegalResearchForm = ({ setIsLoading }) => {
       </div>
 
       {result && (
-        <div className="w-full max-w-4xl mx-auto bg-gray-50 rounded-lg p-8 shadow-lg">
-          <div ref={reportRef} style={pdfStyles.container}>
+        <div className="w-[95%] sm:w-full max-w-4xl mx-auto bg-gray-50 rounded-lg p-4 sm:p-8 shadow-lg">
+          <div
+            ref={reportRef}
+            className="sm:bg-white sm:p-8 sm:rounded-lg"
+            style={{
+              ...pdfStyles.container,
+              margin: 0,
+              padding: 0,
+              backgroundColor: "transparent",
+              maxWidth: "none",
+            }}
+          >
             {/* 제목 + 버튼 */}
-            <div className="flex justify-between items-center">
-              <h2 style={{ ...pdfStyles.title, fontSize: "26px" }}>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-0 mb-2">
+              <h2 className="text-md sm:text-2xl font-bold mb-2">
                 📄 법률 검토 보고서
               </h2>
               <button
                 onClick={() => generateLegalPDF(formData, result)}
-                className="px-4 py-2 bg-Main text-white rounded-lg pdf-download-btn"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-Main text-white rounded-lg pdf-download-btn text-sm sm:text-base"
               >
                 PDF 다운로드
               </button>
@@ -237,10 +247,10 @@ const LegalResearchForm = ({ setIsLoading }) => {
 
             {/* 정보란 */}
             <div
+              className="text-xs sm:text-sm"
               style={{
-                fontSize: "14px",
                 lineHeight: "1.6",
-                marginBottom: "16px",
+                marginBottom: "12px sm:16px",
               }}
             >
               <p>작성일시: {result.timestamp}</p>
@@ -249,12 +259,12 @@ const LegalResearchForm = ({ setIsLoading }) => {
               <p>관련자: {formData.related_party}</p>
             </div>
 
-            <hr className="my-4 border-gray-300" />
+            <hr className="my-3 sm:my-4 border-gray-300" />
 
             {/* 본문 */}
             <div
+              className="text-sm sm:text-base"
               style={{
-                fontSize: "15px",
                 lineHeight: "1.8",
                 whiteSpace: "pre-wrap",
               }}
