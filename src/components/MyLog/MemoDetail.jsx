@@ -38,7 +38,7 @@ const MemoDetail = ({ isOpen, memo, onClose }) => {
       <div className="container mx-auto relative z-[60]">
         <div className="left-layout bg-[#f7f6f4] rounded-xl sm:w-[900px] w-[95%] sm:h-[820px] h-[600px] sm:p-8 p-4 sm:mt-[65px] mt-[40px] sm:border sm:border-gray-300 border-0 pointer-events-auto">
           {/* 상단 제목과 버튼 */}
-          <div className="relative flex justify-end mb-16 sm:mb-16">
+          <div className="relative flex justify-end mb-16">
             <h2 className="absolute left-1/2 sm:top-6 top-10 -translate-x-1/2 -translate-y-1/2 sm:text-2xl text-xl font-bold">
               메모 상세보기
             </h2>
