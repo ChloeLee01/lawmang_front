@@ -152,41 +152,72 @@ const TaxResearchForm = ({ setIsLoading }) => {
             >
               {isLoading ? "분석 중..." : "세무 검토 요청"}
             </button>
-            {isLoading && (
-              <div className="flex items-center justify-center gap-2 mt-4 md:mt-6">
-                <p className="text-xs md:text-sm text-gray-500">
-                  약 1~2분 정도의 시간이 소요될 수 있습니다.
-                </p>
-                <svg
-                  className="w-4 h-4 md:w-5 md:h-5 text-Main loading-icon"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-              </div>
-            )}
+            <div className="flex items-center justify-center gap-2 mt-4 md:mt-6">
+              {isLoading ? (
+                <>
+                  <p className="text-xs md:text-sm text-gray-500">
+                    약 1~2분 정도의 시간이 소요될 수 있습니다.
+                  </p>
+                  <svg
+                    className="w-4 h-4 md:w-5 md:h-5 text-Main loading-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                    />
+                  </svg>
+                </>
+              ) : result ? (
+                <>
+                  <svg
+                    className="w-4 h-4 md:w-5 md:h-5 text-green-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <p className="text-xs md:text-sm font-semibold text-gray-700">
+                    작성이 완료되었습니다! 아래의 내용을 확인해주세요.
+                  </p>
+                </>
+              ) : null}
+            </div>
           </div>
         </form>
       </div>
 
       {result && (
-        <div className="w-full max-w-4xl mx-auto bg-gray-50 rounded-lg p-8">
-          <div ref={reportRef} style={pdfStyles.container}>
+        <div className="w-[95%] sm:w-full max-w-4xl mx-auto bg-gray-50 rounded-lg p-4 sm:p-8 shadow-lg">
+          <div
+            ref={reportRef}
+            className="sm:bg-white sm:p-8 sm:rounded-lg"
+            style={{
+              ...pdfStyles.container,
+              margin: 0,
+              padding: 0,
+              backgroundColor: "transparent",
+              maxWidth: "none",
+            }}
+          >
             {/* 제목 + 버튼 */}
-            <div className="flex justify-between items-center">
-              <h2 style={{ ...pdfStyles.title, fontSize: "26px" }}>
+            <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-2">
+              <h2 className="text-md sm:text-2xl font-bold text-center sm:text-left w-full sm:w-auto">
                 📄 세무 검토 보고서
               </h2>
               <button
                 onClick={() => generateTaxPDF(formData, result)}
-                className="px-4 py-2 bg-Main text-white rounded-lg pdf-download-btn"
+                className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-2 bg-Main text-white rounded-lg pdf-download-btn text-sm sm:text-base"
               >
                 PDF 다운로드
               </button>
@@ -194,10 +225,10 @@ const TaxResearchForm = ({ setIsLoading }) => {
 
             {/* 정보란 */}
             <div
+              className="text-xs sm:text-sm"
               style={{
-                fontSize: "14px",
                 lineHeight: "1.6",
-                marginBottom: "16px",
+                marginBottom: "12px",
               }}
             >
               <p>작성일시: {result.timestamp}</p>
@@ -206,12 +237,12 @@ const TaxResearchForm = ({ setIsLoading }) => {
               <p>소득/사업유형: {formData.income_type}</p>
             </div>
 
-            <hr className="my-4 border-gray-300" />
+            <hr className="my-3 sm:my-4 border-gray-300" />
 
             {/* 본문 */}
             <div
+              className="text-sm sm:text-base"
               style={{
-                fontSize: "15px",
                 lineHeight: "1.8",
                 whiteSpace: "pre-wrap",
               }}
