@@ -139,7 +139,7 @@ const Template = () => {
   return (
     <div className="container min-h-screen">
       <div className="left-layout">
-        <div className="px-0 pt-[135px] pb-10">
+        <div className="px-0 pt-[100px] sm:pt-[135px] pb-10">
           {/* 헤더 섹션 추가 */}
           <div className="flex items-center gap-2 sm:gap-4 mb-6 sm:mb-8">
             <LuFileSearch className="text-4xl sm:text-6xl text-Main" />
@@ -208,7 +208,7 @@ const Template = () => {
                     <button
                       key={key}
                       onClick={() => handleCategoryClick(key)}
-                      className={`px-2 sm:px-3 py-1 sm:py-1.5 border rounded-lg transition-colors duration-200
+                      className={`px-2 sm:px-3 py-1.5 border rounded-lg transition-colors duration-200
                         min-w-fit sm:min-w-[100px] text-center text-xs sm:text-sm
                         whitespace-nowrap
                         ${

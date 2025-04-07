@@ -190,7 +190,7 @@ const Precedent = () => {
   return (
     <div className="container min-h-screen">
       <div className="left-layout">
-        <div className="px-0 pt-[135px] pb-10">
+        <div className="px-0 pt-[100px] sm:pt-[135px] pb-10">
           {/* 헤더 섹션 */}
           <div className="flex items-center gap-4 mb-8">
             <ImHammer2 className="text-4xl sm:text-6xl text-Main mr-2" />
@@ -200,14 +200,15 @@ const Precedent = () => {
           </div>
 
           {/* 검색바 */}
-          <div className="relative mb-4 sm:mb-8">
+          <div className="relative mb-6 sm:mb-8">
             <div className="relative w-full max-w-[900px]">
               <input
                 type="text"
                 placeholder="판례 및 키워드를 입력해주세요..."
-                className="w-full p-2 sm:p-4 pl-8 sm:pl-12 text-sm sm:text-lg border border-gray-300 rounded-xl 
-                          focus:outline-none focus:border-Main focus:ring-1 focus:ring-[#d7d5cc] 
-                          transition-colors duration-200 bg-gray-50/50 hover:bg-white placeholder:text-xs sm:placeholder:text-base"
+                className="w-full p-3 sm:p-4 pl-10 sm:pl-12 text-sm sm:text-lg border border-gray-300 rounded-xl shadow-sm 
+                         focus:outline-none focus:border-Main focus:ring-1 focus:ring-[#d7d5cc] 
+                          transition-colors duration-200
+                          bg-gray-50/50 hover:bg-white"
                 value={searchQuery}
                 onChange={handleSearchInputChange}
                 onKeyPress={handleKeyPress}
@@ -249,7 +250,7 @@ const Precedent = () => {
                 <button
                   key={category}
                   onClick={() => handleCategorySelect(category)}
-                  className={`px-2 sm:px-3 py-1 sm:py-1.5 border rounded-lg transition-colors duration-200
+                  className={`px-2 sm:px-3 py-1.5 border rounded-lg transition-colors duration-200
                     min-w-[80px] sm:min-w-[100px] text-center text-xs sm:text-sm whitespace-nowrap
                     ${
                       selectedCategory === category

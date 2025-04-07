@@ -201,7 +201,7 @@ const Consultation = () => {
   return (
     <div className="container min-h-screen">
       <div className="left-layout">
-        <div className="px-0 pt-[135px] pb-10">
+        <div className="px-0 pt-[100px] sm:pt-[135px] pb-10">
           {/* 헤더 섹션*/}
           <div className="flex items-center gap-4 mb-8">
             <SlSpeech className="text-4xl sm:text-6xl text-Main" />
@@ -211,14 +211,15 @@ const Consultation = () => {
           </div>
 
           {/* 검색창 */}
-          <div className="relative mb-4 sm:mb-8">
+          <div className="relative mb-6 sm:mb-8">
             <div className="relative w-full max-w-[900px]">
               <input
                 type="text"
                 placeholder="궁금한 법률 상담 사례를 검색하세요..."
-                className="w-full p-2 sm:p-4 pl-8 sm:pl-12 text-sm sm:text-lg border border-gray-300 rounded-xl shadow-sm 
+                className="w-full p-3 sm:p-4 pl-10 sm:pl-12 text-sm sm:text-lg border border-gray-300 rounded-xl shadow-sm 
                          focus:outline-none focus:border-Main focus:ring-1 focus:ring-[#d7d5cc] 
-                          transition-colors duration-200 bg-gray-50/50 hover:bg-white placeholder:text-xs sm:placeholder:text-base"
+                          transition-colors duration-200
+                          bg-gray-50/50 hover:bg-white"
                 value={searchQuery}
                 onChange={handleSearchInputChange}
                 onKeyDown={handleKeyPress}
@@ -260,7 +261,7 @@ const Consultation = () => {
                 <button
                   key={category}
                   onClick={() => handleCategorySelect(category)}
-                  className={`px-2 sm:px-3 py-1 sm:py-1.5 border rounded-lg transition-colors duration-200
+                  className={`px-2 sm:px-3 py-1.5 border rounded-lg transition-colors duration-200
                     min-w-fit sm:min-w-[100px] text-center text-xs sm:text-sm whitespace-nowrap
                     ${
                       selectedCategory === category
