@@ -166,7 +166,7 @@ const MemoBoard = () => {
       </div>
 
       <div className="h-[400px] p-4 overflow-y-auto">
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {isLoading ? (
             <div className="col-span-4 text-center text-gray-500 mt-[150px]">
               로딩 중...
