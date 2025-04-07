@@ -233,13 +233,13 @@ const LegalResearchForm = ({ setIsLoading }) => {
             }}
           >
             {/* 제목 + 버튼 */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-0 mb-2">
-              <h2 className="text-md sm:text-2xl font-bold mb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-2">
+              <h2 className="text-md sm:text-2xl font-bold text-center sm:text-left w-full sm:w-auto">
                 📄 법률 검토 보고서
               </h2>
               <button
                 onClick={() => generateLegalPDF(formData, result)}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-Main text-white rounded-lg pdf-download-btn text-sm sm:text-base"
+                className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-2 bg-Main text-white rounded-lg pdf-download-btn text-sm sm:text-base"
               >
                 PDF 다운로드
               </button>
@@ -250,7 +250,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               className="text-xs sm:text-sm"
               style={{
                 lineHeight: "1.6",
-                marginBottom: "12px sm:16px",
+                marginBottom: "12px",
               }}
             >
               <p>작성일시: {result.timestamp}</p>
