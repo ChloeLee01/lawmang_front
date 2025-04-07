@@ -208,7 +208,7 @@ const MemoBoard = () => {
                     {new Date(memo.created_at).toLocaleDateString()}
                   </div>
 
-                  <h3 className="font-bold text-[#5d4d40] mb-1 sm:mb-2 text-xs sm:text-sm">
+                  <h3 className="font-bold text-[#5d4d40] mb-1 sm:mb-2 text-xs sm:text-[17px] leading-[1.4] sm:leading-[1.4]">
                     {memo.title}
                   </h3>
                   <div className="flex-1 text-[10px] sm:text-xs text-[#5d4d40] line-clamp-2 overflow-hidden max-h-[3.2em] sm:max-h-[2.6em]">
