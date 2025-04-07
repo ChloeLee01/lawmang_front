@@ -180,9 +180,7 @@ const DocumentSection = ({
             {currentFiles.map((fileInfo, index) => (
               <div
                 key={index}
-                className="border border-gray-300 rounded-lg p-2 sm:p-3 transition-all duration-200 
-                         hover:border-gray-200 hover:shadow-md hover:bg-gray-50 
-                         hover:translate-x-1 cursor-pointer"
+                className="border border-gray-300 rounded-lg p-2 sm:p-3 transition-all duration-200 cursor-default"
               >
                 <div className="flex justify-between items-center gap-2 sm:gap-4">
                   <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
