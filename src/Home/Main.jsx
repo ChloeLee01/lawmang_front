@@ -44,8 +44,7 @@ const Main = () => {
     <div className="w-screen">
       <div className="h-screen">
         <div className="fixed w-full h-screen">
-          <div className="opacity-50 overlay w-full h-full bg-black left-0 top-0 z-10 absolute"></div>
-          <div className="video_container w-screen h-screen absolute top-0 left-0 overflow-hidden">
+          <div className="video_container w-screen h-screen absolute top-0 left-0 overflow-hidden z-0">
             <video
               ref={videoRef}
               src={mainVideo}
@@ -53,11 +52,15 @@ const Main = () => {
               autoPlay
               muted
               loop
+              playsInline
+              webkit-playsinline="true"
+              x5-playsinline="true"
               onLoadedMetadata={(e) => {
                 e.target.playbackRate = 0.7;
               }}
             ></video>
           </div>
+          <div className="opacity-50 overlay w-full h-full bg-black left-0 top-0 z-10 absolute"></div>
 
           {/* 메인 문구 */}
           <div className="fixed bottom-[125px] left-[50px] 2xl:left-[150px] z-20 text-white">
