@@ -197,7 +197,7 @@ const Detail = () => {
                   d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
                 />
               </svg>
-              <span>목록으로</span>
+              <span className="text-sm sm:text-base">목록으로</span>
             </button>
 
             <div className="border border-gray-300 rounded-3xl p-4 sm:p-8 w-full max-w-[900px] h-[790px] ">

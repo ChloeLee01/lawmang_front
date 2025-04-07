@@ -40,6 +40,14 @@ const LegalResearchForm = ({ setIsLoading }) => {
           input[type="date"]::-webkit-calendar-picker-indicator {
             cursor: pointer;
           }
+          input[type="date"] {
+            font-size: 14px;
+          }
+          @media (min-width: 768px) {
+            input[type="date"] {
+              font-size: 16px;
+            }
+          }
           @keyframes spin {
             from { transform: rotate(360deg); }
             to { transform: rotate(0deg); }
@@ -78,7 +86,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
                 setFormData({ ...formData, incident_date: e.target.value })
               }
               max={new Date().toISOString().split("T")[0]}
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main text-sm md:text-base"
               required
             />
           </div>
