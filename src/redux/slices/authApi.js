@@ -80,13 +80,12 @@ export const authApi = createApi({
       query: (data) => ({
         url: `/auth/update`,
         method: "PUT",
-        body: JSON.stringify(data), // ✅ JSON 변환 필수
+        body: JSON.stringify(data),
         headers: {
-          "Content-Type": "application/json", // ✅ JSON 형식 지정
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ 인증 토큰 추가
+          "Content-Type": "application/json",
         },
       }),
-      invalidatesTags: ['User'], // User 태그를 무효화하여 getCurrentUser를 다시 호출하도록 함
+      invalidatesTags: ['User'],
     }),
 
     // ✅ 이메일 인증 코드 확인 엔드포인트 추가
@@ -155,7 +154,6 @@ export const authApi = createApi({
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -164,10 +162,8 @@ export const authApi = createApi({
           await queryFulfilled;
           console.log('회원탈퇴 응답 성공');
           
-          // ✅ Redux 상태 초기화
           dispatch(logout());
     
-          // ✅ localStorage에서 사용자 정보 삭제
           localStorage.removeItem('token');
           localStorage.removeItem('user');
     
@@ -175,7 +171,7 @@ export const authApi = createApi({
           console.error('회원탈퇴 실패:', err);
         }
       },
-      invalidatesTags: ['User'], // ✅ User 태그 무효화 -> getCurrentUser 다시 호출
+      invalidatesTags: ['User'],
     }),
   }),
 });
