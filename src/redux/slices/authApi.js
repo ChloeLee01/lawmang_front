@@ -29,9 +29,9 @@ export const authApi = createApi({
     // ✅ 닉네임 중복 확인 API
     checkNickname: builder.query({
       query: (nickname) => ({
-          url: `/auth/check-nickname`,
-          params: { nickname },  // URL 파라미터로 전달
-          method: 'GET'
+        url: `/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`,
+        method: 'GET',
+        credentials: 'include',
       }),
     }),
 
