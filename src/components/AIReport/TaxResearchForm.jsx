@@ -57,7 +57,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, report_type: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 종합소득세, 부가가치세 등"
               required
             />
@@ -73,7 +73,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, report_period: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 2023년 귀속, 2024년 1기 등"
               required
             />
@@ -89,7 +89,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, income_type: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 프리랜서, 개인사업자 등"
               required
             />
@@ -104,7 +104,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, concern: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="세무 신고시 우려되는 사항을 설명해주세요"
               required
             />
@@ -120,7 +120,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, desired_result: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 적절한 공제 적용, 세금 최적화 등"
               required
             />
@@ -135,7 +135,7 @@ const TaxResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, additional_info: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="기타 참고할 만한 사항을 자유롭게 작성해주세요"
             />
           </div>

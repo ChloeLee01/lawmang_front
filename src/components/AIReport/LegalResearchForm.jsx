@@ -69,7 +69,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, case_type: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 임대차 분쟁, 손해배상 등"
               required
             />
@@ -86,7 +86,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
                 setFormData({ ...formData, incident_date: e.target.value })
               }
               max={new Date().toISOString().split("T")[0]}
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main text-sm md:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main text-sm md:text-base bg-gray-50/50 hover:bg-white"
               required
             />
           </div>
@@ -101,7 +101,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, related_party: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 건물주, 거래처 등"
               required
             />
@@ -116,7 +116,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, fact_details: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main h-24 md:h-32 resize-none placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="사건의 경위를 상세히 설명해주세요"
               required
             />
@@ -132,7 +132,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, evidence: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 계약서, 영수증, 녹취록 등"
               required
             />
@@ -148,7 +148,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, prior_action: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 내용증명 발송, 유선상 합의 시도 등"
               required
             />
@@ -164,7 +164,7 @@ const LegalResearchForm = ({ setIsLoading }) => {
               onChange={(e) =>
                 setFormData({ ...formData, desired_result: e.target.value })
               }
-              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base"
+              className="w-full p-2 md:p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-Main placeholder:text-sm md:placeholder:text-base bg-gray-50/50 hover:bg-white"
               placeholder="예: 보증금 전액 반환, 손해배상 등"
               required
             />
