@@ -26,9 +26,13 @@ export const authApi = createApi({
       }),
     }),
 
-    // ✅ 닉네임 중복 확인 API 추가
+    // ✅ 닉네임 중복 확인 API
     checkNickname: builder.query({
-      query: (nickname) => `/auth/check-nickname?nickname=${nickname}`,
+      query: (nickname) => ({
+          url: `/auth/check-nickname`,
+          params: { nickname },  // URL 파라미터로 전달
+          method: 'GET'
+      }),
     }),
 
     // ✅ 회원가입 API (이메일 인증 코드 필요)
@@ -130,7 +134,7 @@ export const authApi = createApi({
       }),
     }),
 
-    // 현재 비밀번호 확인 endpoint 추가
+    // ✅ 현재 비밀번호 확인 API
     verifyCurrentPassword: builder.mutation({
       query: (credentials) => ({
         url: `/auth/verify-password`,
@@ -143,11 +147,14 @@ export const authApi = createApi({
       }),
     }),
 
+    // ✅ 회원탈퇴 API
     deleteUser: builder.mutation({
       query: () => ({
         url: `/auth/withdraw`,
         method: 'DELETE',
+        credentials: 'include',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       }),
