@@ -12,6 +12,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { CiUser } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { updateUserInfo } from "../../redux/slices/authSlice";
+import { logout } from "../../redux/slices/authSlice";
 
 const Modify = () => {
   const navigate = useNavigate();
@@ -141,8 +142,7 @@ const Modify = () => {
 
     // 변경할 데이터가 있는지 확인
     const hasNicknameChange = formData.nickname !== user?.nickname;
-    const hasPasswordChange =
-      formData.newPassword || formData.confirmNewPassword;
+    const hasPasswordChange = formData.newPassword || formData.confirmNewPassword;
 
     // 아무 변경사항이 없는 경우
     if (!hasNicknameChange && !hasPasswordChange) {
@@ -183,19 +183,29 @@ const Modify = () => {
       }
     }
 
-    // 변경할 데이터만 포함하여 전송
-    const updateData = {};
-    if (hasNicknameChange) {
-      updateData.nickname = formData.nickname;
-    }
-    if (hasPasswordChange) {
-      updateData.currentPassword = formData.currentPassword;
-      updateData.newPassword = formData.newPassword;
-    }
-
     try {
-      await updateUser(updateData).unwrap();
-      // Redux store 업데이트
+      // 현재 비밀번호 확인이 필요한 경우
+      if (hasPasswordChange) {
+        try {
+          await verifyCurrentPassword({
+            currentPassword: formData.currentPassword,
+          }).unwrap();
+        } catch (err) {
+          alert("현재 비밀번호가 일치하지 않습니다.");
+          return;
+        }
+      }
+
+      const updateData = {};
+      if (hasNicknameChange) {
+        updateData.nickname = formData.nickname;
+      }
+      if (hasPasswordChange) {
+        updateData.newPassword = formData.newPassword;
+      }
+
+      const result = await updateUser(updateData).unwrap();
+      
       if (updateData.nickname) {
         dispatch(updateUserInfo({ nickname: updateData.nickname }));
       }
@@ -204,7 +214,13 @@ const Modify = () => {
       navigate("/mypage");
     } catch (err) {
       console.error("❌ 회원정보 수정 실패:", err);
-      alert(err.data?.detail || "회원정보 수정 실패");
+      if (err.status === 401) {
+        alert("인증이 만료되었습니다. 다시 로그인해주세요.");
+        dispatch(logout());
+        navigate("/login");
+      } else {
+        alert(err.data?.detail || "회원정보 수정 실패");
+      }
     }
   };
 
