@@ -29,11 +29,16 @@ export const authApi = createApi({
     // ✅ 닉네임 중복 확인 API
     checkNickname: builder.query({
       query: (nickname) => ({
-          url: `/auth/check-nickname`,
-          params: { nickname },  // URL 파라미터로 전달
-          method: 'GET'
+        url: `/auth/check-nickname`,
+        method: 'GET',
+        params: { nickname }
       }),
-      keepUnusedDataFor: 0,
+      transformResponse: (response) => {
+        return { available: response.available };
+      },
+      transformErrorResponse: (error) => {
+        return { error: error.data?.detail || '닉네임 중복 확인 중 오류가 발생했습니다.' };
+      }
     }),
 
     // ✅ 회원가입 API (이메일 인증 코드 필요)

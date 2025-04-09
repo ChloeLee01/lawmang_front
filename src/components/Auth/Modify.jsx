@@ -38,9 +38,7 @@ const Modify = () => {
     confirmNewPassword: "",
   });
 
-  const { data: nicknameData, refetch: checkNickname } = useCheckNicknameQuery(formData.nickname, {
-    skip: true,
-  });
+  const [checkNickname] = useCheckNicknameQuery();
 
   const [currentPasswordVerified, setCurrentPasswordVerified] = useState(false);
   const [currentPasswordError, setCurrentPasswordError] = useState("");
@@ -111,8 +109,10 @@ const Modify = () => {
     }
 
     try {
-      const result = await checkNickname().unwrap();
-      if (result.available) {
+      const result = await checkNickname(formData.nickname).unwrap();
+      console.log("닉네임 중복 확인 응답:", result);
+
+      if (result?.available) {
         setNicknameStatus(true);
         setNicknameError("");
       } else {
@@ -120,8 +120,6 @@ const Modify = () => {
         setNicknameError("∙ 이미 사용 중인 닉네임입니다.");
       }
     } catch (err) {
-      setNicknameStatus(false);
-      setNicknameError("∙ 닉네임 중복 확인 중 오류가 발생했습니다.");
       console.error("닉네임 중복 확인 오류:", {
         status: err?.status,
         error: err?.error,
@@ -129,6 +127,8 @@ const Modify = () => {
         originalError: err?.originalError,
         message: err?.message
       });
+      setNicknameStatus(false);
+      setNicknameError("∙ 닉네임 중복 확인 중 오류가 발생했습니다.");
     }
   };
 
