@@ -164,19 +164,16 @@ const Modify = () => {
 
     // 비밀번호 변경 시 유효성 검사
     if (hasPasswordChange) {
-      // 새 비밀번호만 입력하고 확인은 안 한 경우
       if (!formData.newPassword || !formData.confirmNewPassword) {
         alert("새 비밀번호와 확인을 모두 입력해주세요.");
         return;
       }
 
-      // 비밀번호 유효성 검사
       if (!passwordChecks.length || !passwordChecks.special) {
         alert("비밀번호는 8자 이상이며 특수문자를 포함해야 합니다.");
         return;
       }
 
-      // 비밀번호 일치 여부 확인
       if (formData.newPassword !== formData.confirmNewPassword) {
         alert("새 비밀번호가 일치하지 않습니다.");
         return;
@@ -184,23 +181,12 @@ const Modify = () => {
     }
 
     try {
-      // 현재 비밀번호 확인이 필요한 경우
-      if (hasPasswordChange) {
-        try {
-          await verifyCurrentPassword({
-            currentPassword: formData.currentPassword,
-          }).unwrap();
-        } catch (err) {
-          alert("현재 비밀번호가 일치하지 않습니다.");
-          return;
-        }
-      }
-
       const updateData = {};
       if (hasNicknameChange) {
         updateData.nickname = formData.nickname;
       }
       if (hasPasswordChange) {
+        updateData.currentPassword = formData.currentPassword;
         updateData.newPassword = formData.newPassword;
       }
 
