@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   useGetCurrentUserQuery,
   useUpdateUserMutation,
-  useCheckNicknameQuery,
+  useCheckNicknameMutation,
   useVerifyCurrentPasswordMutation,
   useDeleteUserMutation,
 } from "../../redux/slices/authApi";
@@ -38,7 +38,7 @@ const Modify = () => {
     confirmNewPassword: "",
   });
 
-  const [checkNickname] = useCheckNicknameQuery();
+  const [checkNickname] = useCheckNicknameMutation();
 
   const [currentPasswordVerified, setCurrentPasswordVerified] = useState(false);
   const [currentPasswordError, setCurrentPasswordError] = useState("");
