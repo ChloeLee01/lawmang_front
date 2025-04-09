@@ -4,7 +4,7 @@ import {
   useSendEmailCodeMutation,
   useRegisterUserMutation,
   useVerifyEmailCodeMutation,
-  useCheckNicknameQuery,
+  useCheckNicknameMutation,
 } from "../../redux/slices/authApi";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
@@ -36,7 +36,7 @@ const Signup = () => {
 
   // ✅ 닉네임 중복 확인
   const { data: nicknameData, error: nicknameErrorResponse } =
-    useCheckNicknameQuery(
+    useCheckNicknameMutation(
       formData.nickname,
       { skip: !formData.nickname } // 닉네임 입력 전에는 요청하지 않음
     );
