@@ -26,14 +26,13 @@ export const authApi = createApi({
       }),
     }),
 
-    // ✅ 닉네임 중복 확인 API
-    checkNickname: builder.query({
+    // ✅ 닉네임 중복 확인 API를 mutation으로 변경
+    checkNickname: builder.mutation({
       query: (nickname) => ({
-          url: `/auth/check-nickname`,
-          params: { nickname },  // URL 파라미터로 전달
-          method: 'GET'
+        url: `/auth/check-nickname`,
+        method: 'GET',
+        params: { nickname }
       }),
-      keepUnusedDataFor: 0,
     }),
 
     // ✅ 회원가입 API (이메일 인증 코드 필요)
@@ -194,7 +193,7 @@ export const {
   useLogoutUserMutation,
   useSendMessageMutation,
   useUpdateUserMutation,
-  useCheckNicknameQuery,
+  useCheckNicknameMutation,
   useVerifyCurrentPasswordMutation,
   useDeleteUserMutation,
 } = authApi;
