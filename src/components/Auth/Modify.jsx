@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   useGetCurrentUserQuery,
   useUpdateUserMutation,
-  useCheckNicknameMutation,
+  useCheckNicknameQuery,
   useVerifyCurrentPasswordMutation,
   useDeleteUserMutation,
 } from "../../redux/slices/authApi";
@@ -38,7 +38,9 @@ const Modify = () => {
     confirmNewPassword: "",
   });
 
-  const [checkNickname] = useCheckNicknameMutation();
+  const { data: nicknameData, refetch: checkNickname } = useCheckNicknameQuery(null, {
+    skip: true,
+  });
 
   const [currentPasswordVerified, setCurrentPasswordVerified] = useState(false);
   const [currentPasswordError, setCurrentPasswordError] = useState("");
@@ -101,15 +103,15 @@ const Modify = () => {
       setNicknameError("닉네임을 입력해주세요.");
       return;
     }
-
+  
     if (formData.nickname === user?.nickname) {
       setNicknameStatus(false);
       setNicknameError("∙ 현재 사용중인 닉네임입니다.");
       return;
     }
-
+  
     try {
-      const result = await checkNickname(formData.nickname).unwrap();
+      const result = await checkNickname({ nickname: formData.nickname }).unwrap();
       if (result?.available) {
         setNicknameStatus(true);
         setNicknameError("");
@@ -122,7 +124,7 @@ const Modify = () => {
       setNicknameStatus(false);
       setNicknameError("∙ 닉네임 중복 확인 중 오류가 발생했습니다.");
     }
-  };
+  };  
 
   const handleVerifyCurrentPassword = async () => {
     if (!formData.currentPassword) {
