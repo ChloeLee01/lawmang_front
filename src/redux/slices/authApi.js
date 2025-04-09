@@ -2,29 +2,20 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logout } from "../slices/authSlice";
 import { BASE_URL } from "./apis";
 
-// 토큰 관련 유틸리티 함수
-const getToken = () => {
-  const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
-  if (!token) {
-    console.error('토큰이 없습니다. 로그인이 필요합니다.');
-    return null;
-  }
-  return token;
-};
-
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ 
     baseUrl: `${BASE_URL}/api`,
+    credentials: 'include',  // 쿠키 포함
     prepareHeaders: (headers) => {
-      const token = getToken();
+      const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ['User'],
+  tagTypes: ['User'], // 캐시 태그 추가
   endpoints: (builder) => ({
     // ✅ 이메일 인증 코드 요청 API
     sendEmailCode: builder.mutation({
@@ -38,8 +29,9 @@ export const authApi = createApi({
     // ✅ 닉네임 중복 확인 API
     checkNickname: builder.query({
       query: (nickname) => ({
-        url: `/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`,
-        method: 'GET',
+          url: `/auth/check-nickname`,
+          params: { nickname },  // URL 파라미터로 전달
+          method: 'GET'
       }),
     }),
 
@@ -76,7 +68,7 @@ export const authApi = createApi({
         url: `/auth/me`,
         method: "GET",
       }),
-      providesTags: ['User'],
+      providesTags: ['User'], // 이 쿼리가 User 태그를 제공
     }),
 
     // ✅ 회원정보 수정 API 추가
@@ -84,12 +76,9 @@ export const authApi = createApi({
       query: (data) => ({
         url: `/auth/update`,
         method: "PUT",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: data,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ['User'], // User 태그를 무효화하여 getCurrentUser를 다시 호출하도록 함
     }),
 
     // ✅ 이메일 인증 코드 확인 엔드포인트 추가
@@ -143,9 +132,6 @@ export const authApi = createApi({
         url: `/auth/verify-password`,
         method: "POST",
         body: credentials,
-        headers: {
-          "Content-Type": "application/json",
-        },
       }),
     }),
 
@@ -154,9 +140,6 @@ export const authApi = createApi({
       query: () => ({
         url: `/auth/withdraw`,
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
@@ -164,16 +147,16 @@ export const authApi = createApi({
           await queryFulfilled;
           console.log('회원탈퇴 응답 성공');
           
+          // ✅ Redux 상태 초기화
           dispatch(logout());
     
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
+          document.cookie = 'access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     
         } catch (err) {
           console.error('회원탈퇴 실패:', err);
         }
       },
-      invalidatesTags: ['User'],
+      invalidatesTags: ['User'], // ✅ User 태그 무효화 -> getCurrentUser 다시 호출
     }),
   }),
 });
