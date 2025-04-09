@@ -38,8 +38,8 @@ const Modify = () => {
     confirmNewPassword: "",
   });
 
-  const { data: nicknameData, refetch: checkNickname } = useCheckNicknameQuery(null, {
-    skip: true,
+  const { data: nicknameData, refetch: checkNickname } = useCheckNicknameQuery(formData.nickname, {
+    skip: !formData.nickname,
   });
 
   const [currentPasswordVerified, setCurrentPasswordVerified] = useState(false);
@@ -111,7 +111,7 @@ const Modify = () => {
     }
 
     try {
-      const result = await checkNickname(formData.nickname);
+      const result = await checkNickname();
       if (result?.data?.available) {
         setNicknameStatus(true);
         setNicknameError("");
