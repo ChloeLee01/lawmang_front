@@ -28,7 +28,7 @@ export const authApi = createApi({
 
     // ✅ 닉네임 중복 확인 API
     checkNickname: builder.mutation({
-      query: ({nickname}) => ({
+      query: ({ nickname }) => ({
           url: `/auth/check-nickname`,
           params: { nickname },
           method: 'GET'
