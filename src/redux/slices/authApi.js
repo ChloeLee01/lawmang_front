@@ -10,7 +10,7 @@ export const authApi = createApi({
     prepareHeaders: (headers) => {
       const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
     },
@@ -59,6 +59,7 @@ export const authApi = createApi({
         url: `/auth/logout`,
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       }),
     }),
 
@@ -67,6 +68,9 @@ export const authApi = createApi({
       query: () => ({
         url: `/auth/me`,
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }),
       providesTags: ['User'], // 이 쿼리가 User 태그를 제공
     }),
@@ -76,7 +80,11 @@ export const authApi = createApi({
       query: (data) => ({
         url: `/auth/update`,
         method: "PUT",
-        body: data,
+        body: JSON.stringify(data), // ✅ JSON 변환 필수
+        headers: {
+          "Content-Type": "application/json", // ✅ JSON 형식 지정
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ 인증 토큰 추가
+        },
       }),
       invalidatesTags: ['User'], // User 태그를 무효화하여 getCurrentUser를 다시 호출하도록 함
     }),
@@ -132,6 +140,10 @@ export const authApi = createApi({
         url: `/auth/verify-password`,
         method: "POST",
         body: credentials,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }),
     }),
 
@@ -140,6 +152,11 @@ export const authApi = createApi({
       query: () => ({
         url: `/auth/withdraw`,
         method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
@@ -150,7 +167,9 @@ export const authApi = createApi({
           // ✅ Redux 상태 초기화
           dispatch(logout());
     
-          document.cookie = 'access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+          // ✅ localStorage에서 사용자 정보 삭제
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
     
         } catch (err) {
           console.error('회원탈퇴 실패:', err);
