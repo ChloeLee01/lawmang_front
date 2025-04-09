@@ -2,48 +2,20 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logout } from "../slices/authSlice";
 import { BASE_URL } from "./apis";
 
-// 토큰 관련 유틸리티 함수
-const getToken = () => {
-  const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
-  if (!token) {
-    console.error('토큰이 없습니다. 로그인이 필요합니다.');
-    return null;
-  }
-  return token;
-};
-
-// 에러 처리 함수
-const handleError = (error) => {
-  if (error.status === 401) {
-    console.error('인증 실패:', error);
-    return { error: '인증이 필요합니다. 다시 로그인해주세요.' };
-  }
-  if (error.status === 403) {
-    console.error('권한 없음:', error);
-    return { error: '해당 작업에 대한 권한이 없습니다.' };
-  }
-  if (error.status === 404) {
-    console.error('리소스 없음:', error);
-    return { error: '요청한 리소스를 찾을 수 없습니다.' };
-  }
-  console.error('API 에러:', error);
-  return { error: error.data?.detail || '알 수 없는 오류가 발생했습니다.' };
-};
-
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ 
     baseUrl: `${BASE_URL}/api`,
-    credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
-      const token = getToken();
+    credentials: 'include',  // 쿠키 포함
+    prepareHeaders: (headers) => {
+      const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ['User'],
+  tagTypes: ['User'], // 캐시 태그 추가
   endpoints: (builder) => ({
     // ✅ 이메일 인증 코드 요청 API
     sendEmailCode: builder.mutation({
@@ -52,58 +24,43 @@ export const authApi = createApi({
         method: "POST",
         body: { email },
       }),
-      transformErrorResponse: handleError,
     }),
 
     // ✅ 닉네임 중복 확인 API
     checkNickname: builder.query({
       query: (nickname) => ({
-        url: `/auth/check-nickname`,
+        url: `/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`,
         method: 'GET',
-        params: { nickname },
         credentials: 'include',
       }),
-      transformErrorResponse: handleError,
     }),
 
-    // ✅ 회원가입 API
+    // ✅ 회원가입 API (이메일 인증 코드 필요)
     registerUser: builder.mutation({
       query: ({ email, password, nickname, code }) => ({
         url: `/auth/register`,
         method: "POST",
         body: { email, password, nickname, code },
       }),
-      transformErrorResponse: handleError,
     }),
 
-    // ✅ 로그인 API
+    // ✅ 로그인 API (JWT 토큰 반환)
     loginUser: builder.mutation({
       query: ({ email, password }) => ({
         url: `/auth/login`,
         method: "POST",
         body: { email, password },
       }),
-      transformErrorResponse: handleError,
     }),
 
-    // ✅ 로그아웃 API
+    // ✅ 로그아웃 API (JWT 토큰 무효화)
     logoutUser: builder.mutation({
-      query: () => ({
+      query: (token) => ({
         url: `/auth/logout`,
         method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
         credentials: "include",
       }),
-      transformErrorResponse: handleError,
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          dispatch(logout());
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
-        } catch (error) {
-          console.error('로그아웃 실패:', error);
-        }
-      },
     }),
 
     // ✅ 현재 로그인한 사용자 정보 조회 API
@@ -111,12 +68,14 @@ export const authApi = createApi({
       query: () => ({
         url: `/auth/me`,
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }),
-      providesTags: ['User'],
-      transformErrorResponse: handleError,
+      providesTags: ['User'], // 이 쿼리가 User 태그를 제공
     }),
 
-    // ✅ 회원정보 수정 API
+    // ✅ 회원정보 수정 API 추가
     updateUser: builder.mutation({
       query: (data) => ({
         url: `/auth/update`,
@@ -127,26 +86,17 @@ export const authApi = createApi({
         },
       }),
       invalidatesTags: ['User'],
-      transformErrorResponse: handleError,
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        try {
-          await queryFulfilled;
-        } catch (error) {
-          console.error('회원정보 수정 실패:', error);
-        }
-      },
     }),
 
-    // ✅ 이메일 인증 코드 확인 API
+    // ✅ 이메일 인증 코드 확인 엔드포인트 추가
     verifyEmailCode: builder.mutation({
       query: (data) => ({
         url: `/auth/verify-email`,
         method: 'POST',
         body: data,
       }),
-      transformErrorResponse: handleError,
     }),
-
+    
     // ✅ 비밀번호 재설정 코드 요청 API
     sendResetCode: builder.mutation({
       query: (data) => ({
@@ -154,7 +104,6 @@ export const authApi = createApi({
         method: 'POST',
         body: data,
       }),
-      transformErrorResponse: handleError,
     }),
 
     // ✅ 비밀번호 재설정 코드 확인 API
@@ -164,7 +113,6 @@ export const authApi = createApi({
         method: 'POST',
         body: data,
       }),
-      transformErrorResponse: handleError,
     }),
 
     // ✅ 비밀번호 변경 API
@@ -174,17 +122,15 @@ export const authApi = createApi({
         method: 'POST',
         body: data,
       }),
-      transformErrorResponse: handleError,
     }),
 
-    // ✅ 챗봇 API
+    // ✅ 챗봇 API 추가
     sendMessage: builder.mutation({
       query: ({ message, category }) => ({
         url: `/chatbot/${category}`,
         method: "POST",
         body: { message },
       }),
-      transformErrorResponse: handleError,
     }),
 
     // ✅ 현재 비밀번호 확인 API
@@ -195,9 +141,9 @@ export const authApi = createApi({
         body: credentials,
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
-      transformErrorResponse: handleError,
     }),
 
     // ✅ 회원탈퇴 API
@@ -210,23 +156,27 @@ export const authApi = createApi({
           'Content-Type': 'application/json',
         },
       }),
-      invalidatesTags: ['User'],
-      transformErrorResponse: handleError,
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
+          console.log('회원탈퇴 요청 시작');
           await queryFulfilled;
+          console.log('회원탈퇴 응답 성공');
+          
           dispatch(logout());
+    
           localStorage.removeItem('token');
           localStorage.removeItem('user');
-        } catch (error) {
-          console.error('회원탈퇴 실패:', error);
-          throw error;
+    
+        } catch (err) {
+          console.error('회원탈퇴 실패:', err);
         }
       },
+      invalidatesTags: ['User'],
     }),
   }),
 });
 
+// ✅ 사용 가능한 API 내보내기
 export const {
   useSendEmailCodeMutation,
   useRegisterUserMutation,
