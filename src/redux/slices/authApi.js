@@ -68,11 +68,9 @@ export const authApi = createApi({
       query: () => ({
         url: `/auth/me`,
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        credentials: 'include',
       }),
-      providesTags: ['User'], // 이 쿼리가 User 태그를 제공
+      providesTags: ['User'],
     }),
 
     // ✅ 회원정보 수정 API 추가
@@ -84,6 +82,7 @@ export const authApi = createApi({
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
       }),
       invalidatesTags: ['User'],
     }),
@@ -141,8 +140,8 @@ export const authApi = createApi({
         body: credentials,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        credentials: 'include',
       }),
     }),
 
