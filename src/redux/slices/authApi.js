@@ -2,15 +2,25 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logout } from "../slices/authSlice";
 import { BASE_URL } from "./apis";
 
+// 토큰 관련 유틸리티 함수
+const getToken = () => {
+  const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
+  if (!token) {
+    console.error('토큰이 없습니다. 로그인이 필요합니다.');
+    return null;
+  }
+  return token;
+};
+
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ 
     baseUrl: `${BASE_URL}/api`,
     credentials: 'include',  // 쿠키 포함
     prepareHeaders: (headers) => {
-      const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
+      const token = getToken();
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
     },
