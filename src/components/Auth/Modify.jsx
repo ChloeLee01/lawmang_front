@@ -122,7 +122,13 @@ const Modify = () => {
     } catch (err) {
       setNicknameStatus(false);
       setNicknameError("∙ 닉네임 중복 확인 중 오류가 발생했습니다.");
-      console.error("닉네임 중복 확인 오류:", err);
+      console.error("닉네임 중복 확인 오류:", {
+        status: err?.status,
+        error: err?.error,
+        data: err?.data,
+        originalError: err?.originalError,
+        message: err?.message
+      });
     }
   };
 
