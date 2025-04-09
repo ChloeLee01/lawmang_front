@@ -16,7 +16,6 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ 
     baseUrl: `${BASE_URL}/api`,
-    credentials: 'include',  // 쿠키 포함
     prepareHeaders: (headers) => {
       const token = getToken();
       if (token) {
@@ -25,7 +24,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['User'], // 캐시 태그 추가
+  tagTypes: ['User'],
   endpoints: (builder) => ({
     // ✅ 이메일 인증 코드 요청 API
     sendEmailCode: builder.mutation({
@@ -41,7 +40,6 @@ export const authApi = createApi({
       query: (nickname) => ({
         url: `/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`,
         method: 'GET',
-        credentials: 'include',
       }),
     }),
 
@@ -69,7 +67,6 @@ export const authApi = createApi({
         url: `/auth/logout`,
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
-        credentials: "include",
       }),
     }),
 
@@ -78,7 +75,6 @@ export const authApi = createApi({
       query: () => ({
         url: `/auth/me`,
         method: "GET",
-        credentials: 'include',
       }),
       providesTags: ['User'],
     }),
@@ -92,7 +88,6 @@ export const authApi = createApi({
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: 'include',
       }),
       invalidatesTags: ['User'],
     }),
@@ -151,7 +146,6 @@ export const authApi = createApi({
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: 'include',
       }),
     }),
 
@@ -160,7 +154,6 @@ export const authApi = createApi({
       query: () => ({
         url: `/auth/withdraw`,
         method: 'DELETE',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
