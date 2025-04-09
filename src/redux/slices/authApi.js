@@ -10,7 +10,7 @@ export const authApi = createApi({
     prepareHeaders: (headers) => {
       const token = document.cookie.match(/access_token=(.*?)(;|$)/)?.[1];
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('Authorization', `Bearer ${token}`);
       }
       return headers;
     },
