@@ -38,8 +38,8 @@ const Modify = () => {
     confirmNewPassword: "",
   });
 
-  const { data: nicknameData } = useCheckNicknameQuery(formData.nickname, {
-    skip: !formData.nickname || formData.nickname === user?.nickname,
+  const { data: nicknameData, refetch: checkNickname } = useCheckNicknameQuery(formData.nickname, {
+    skip: true,
   });
 
   const [currentPasswordVerified, setCurrentPasswordVerified] = useState(false);
@@ -106,16 +106,22 @@ const Modify = () => {
 
     if (formData.nickname === user?.nickname) {
       setNicknameStatus(false);
-      setNicknameError("∙ 이미 사용 중인 닉네임입니다.");
+      setNicknameError("∙ 현재 사용중인 닉네임입니다.");
       return;
     }
 
-    if (nicknameData) {
-      setNicknameStatus(true);
-      setNicknameError("");
-    } else {
+    try {
+      const result = await checkNickname().unwrap();
+      if (result.available) {
+        setNicknameStatus(true);
+        setNicknameError("");
+      } else {
+        setNicknameStatus(false);
+        setNicknameError("∙ 이미 사용 중인 닉네임입니다.");
+      }
+    } catch (err) {
       setNicknameStatus(false);
-      setNicknameError("∙ 이미 사용 중인 닉네임입니다.");
+      setNicknameError("∙ 닉네임 중복 확인 중 오류가 발생했습니다.");
     }
   };
 
@@ -197,7 +203,7 @@ const Modify = () => {
       }
 
       alert("회원정보가 성공적으로 수정되었습니다!");
-      navigate("/mypage");
+      navigate("/");
     } catch (err) {
       console.error("❌ 회원정보 수정 실패:", err);
       if (err.status === 401) {

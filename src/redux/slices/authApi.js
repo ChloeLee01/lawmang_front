@@ -33,6 +33,7 @@ export const authApi = createApi({
           params: { nickname },  // URL 파라미터로 전달
           method: 'GET'
       }),
+      keepUnusedDataFor: 0,
     }),
 
     // ✅ 회원가입 API (이메일 인증 코드 필요)
