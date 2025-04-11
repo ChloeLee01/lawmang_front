@@ -35,11 +35,8 @@ const Signup = () => {
   });
 
   // ✅ 닉네임 중복 확인
-  const { data: nicknameData, error: nicknameErrorResponse } =
-    useCheckNicknameMutation(
-      formData.nickname,
-      { skip: !formData.nickname } // 닉네임 입력 전에는 요청하지 않음
-    );
+  const [checkNickname] = useCheckNicknameMutation();
+
   // ✅ 이메일 인증 코드 요청
   const [sendEmailCode, { isLoading: isSendingCode }] =
     useSendEmailCodeMutation();
@@ -136,13 +133,19 @@ const Signup = () => {
       return;
     }
 
-    // nicknameData가 있으면 사용 가능한 닉네임
-    if (nicknameData) {
-      setNicknameStatus(true);
-      setNicknameError("");
-    } else {
+    try {
+      const result = await checkNickname({ nickname: formData.nickname }).unwrap();
+      if (result?.available) {
+        setNicknameStatus(true);
+        setNicknameError("");
+      } else {
+        setNicknameStatus(false);
+        setNicknameError("∙ 이미 사용 중인 닉네임입니다.");
+      }
+    } catch (err) {
+      console.error("닉네임 중복 확인 오류:", err);
       setNicknameStatus(false);
-      setNicknameError("이미 사용 중인 닉네임입니다.");
+      setNicknameError("∙ 닉네임 중복 확인 중 오류가 발생했습니다.");
     }
   };
 
@@ -180,17 +183,6 @@ const Signup = () => {
     }
   };
 
-  // ✅ 닉네임 검사 결과 처리
-  useState(() => {
-    if (nicknameErrorResponse) {
-      setNicknameStatus(false);
-      setNicknameError("∙ 이미 사용 중인 닉네임입니다.");
-    } else if (nicknameData) {
-      setNicknameStatus(true);
-      setNicknameError("");
-    }
-  }, [nicknameData, nicknameErrorResponse]);
-
   return (
     <div className="min-h-screen flex items-center justify-center relative">
       {/* 단색 배경 */}
@@ -201,11 +193,8 @@ const Signup = () => {
         <h2 className="text-2xl sm:text-4xl text-neutral-700 text-center mb-6 sm:mb-8">
           회원가입
         </h2>
-        <form
-          className="space-y-6 sm:space-y-8 mt-8 sm:mt-16"
-          onSubmit={handleSubmit}
-        >
-          {/* 이메일 입력 및 인증 코드 요청 */}
+        <form className="space-y-6 sm:space-y-8 mt-8 sm:mt-16" onSubmit={handleSubmit}>
+          {/* 이메일 입력 및 인증 코드 요청 - 항상 활성화 */}
           <div className="relative">
             <span className="absolute left-3 top-2.5 sm:top-4">
               <AiOutlineMail className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
@@ -237,7 +226,7 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* 인증 코드 입력 */}
+          {/* 인증 코드 입력 - 코드 전송 후 활성화 */}
           {isCodeSent && (
             <div className="relative">
               <span className="absolute left-3 top-2.5 sm:top-4">
@@ -269,101 +258,109 @@ const Signup = () => {
             </div>
           )}
 
-          {/* 닉네임 입력 */}
-          <div className="relative">
-            <span className="absolute left-3 top-2.5 sm:top-4">
-              <MdOutlinePersonOutline className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
-            </span>
-            <div className="flex">
+          {/* 나머지 입력폼들 - 이메일 인증 후 활성화 */}
+          <div className={`space-y-6 ${!isCodeVerified ? 'opacity-50 pointer-events-none' : ''}`}>
+            {/* 닉네임 입력 */}
+            <div className="relative">
+              <span className="absolute left-3 top-2.5 sm:top-4">
+                <MdOutlinePersonOutline className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
+              </span>
+              <div className="flex">
+                <input
+                  name="nickname"
+                  type="text"
+                  value={formData.nickname}
+                  onChange={handleChange}
+                  placeholder="닉네임"
+                  className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-base sm:text-lg bg-transparent border-b-2 border-gray-400 focus:border-gray-600 outline-none placeholder-gray-400"
+                  disabled={!isCodeVerified}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={handleCheckNickname}
+                  disabled={!isCodeVerified}
+                  className={`ml-2 px-4 py-2 text-white rounded-md whitespace-nowrap w-[100px] text-sm sm:text-base 
+                    ${!isCodeVerified ? 'bg-gray-400' : 'bg-Main hover:bg-Main_hover'}`}
+                >
+                  중복 확인
+                </button>
+              </div>
+              <div className="mt-2 text-xs">
+                {nicknameStatus === false && (
+                  <p className="text-red-500 ">{nicknameError}</p>
+                )}
+                {nicknameStatus === true && (
+                  <p className="text-green-600">✓ 사용 가능한 닉네임 입니다.</p>
+                )}
+              </div>
+            </div>
+
+            {/* 비밀번호 입력 */}
+            <div className="relative">
+              <span className="absolute left-3 top-2.5 sm:top-3">
+                <RiLockPasswordLine className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
+              </span>
               <input
-                name="nickname"
-                type="text"
-                value={formData.nickname}
+                name="password"
+                type="password"
+                value={formData.password}
                 onChange={handleChange}
-                placeholder="닉네임"
+                placeholder="Password"
                 className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-base sm:text-lg bg-transparent border-b-2 border-gray-400 focus:border-gray-600 outline-none placeholder-gray-400"
+                disabled={!isCodeVerified}
                 required
               />
-              <button
-                type="button"
-                onClick={handleCheckNickname}
-                className="ml-2 px-4 py-2 text-white rounded-md whitespace-nowrap w-[100px] text-sm sm:text-base bg-Main hover:bg-Main_hover"
-              >
-                중복 확인
-              </button>
-            </div>
-            <div className="mt-2 text-xs">
-              {nicknameStatus === false && (
-                <p className="text-red-500 ">{nicknameError}</p>
-              )}
-              {nicknameStatus === true && (
-                <p className="text-green-600">✓ 사용 가능한 닉네임 입니다.</p>
-              )}
-            </div>
-          </div>
-
-          {/* 비밀번호 입력 */}
-          <div className="relative">
-            <span className="absolute left-3 top-2.5 sm:top-3">
-              <RiLockPasswordLine className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
-            </span>
-            <input
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Password"
-              className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-base sm:text-lg bg-transparent border-b-2 border-gray-400 focus:border-gray-600 outline-none placeholder-gray-400"
-              required
-            />
-            {/* 비밀번호 조건 표시 */}
-            <div className="mt-2 text-xs">
-              {!passwordChecks?.length && !passwordChecks?.special ? (
-                <p className="text-gray-500">
-                  ∙ 8자 이상 및 특수문자를 포함해주세요
-                </p>
-              ) : !passwordChecks?.length ? (
-                <p className="text-gray-500">∙ 8자 이상 입력해주세요</p>
-              ) : !passwordChecks?.special ? (
-                <p className="text-gray-500">
-                  ∙ 특수문자를 포함해주세요 (!@#$%^&amp;*(),.?":{}|&lt;&gt;)
-                </p>
-              ) : (
-                <p className="text-green-600 font-medium">
-                  ✓ 사용 가능한 비밀번호입니다
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* 비밀번호 확인 */}
-          <div className="relative">
-            <span className="absolute left-3 top-2.5 sm:top-3">
-              <RiLockPasswordLine className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
-            </span>
-            <input
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-              className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-base sm:text-lg bg-transparent border-b-2 border-gray-400 focus:border-gray-600 outline-none placeholder-gray-400"
-              required
-            />
-            {formData.confirmPassword && (
+              {/* 비밀번호 조건 표시 */}
               <div className="mt-2 text-xs">
-                {passwordMatch.isDirty &&
-                  (passwordMatch.isMatching ? (
-                    <p className="text-green-600 font-medium">
-                      ✓ 비밀번호가 일치합니다
-                    </p>
-                  ) : (
-                    <p className="text-red-500">
-                      ∙ 비밀번호가 일치하지 않습니다
-                    </p>
-                  ))}
+                {!passwordChecks?.length && !passwordChecks?.special ? (
+                  <p className="text-gray-500">
+                    ∙ 8자 이상 및 특수문자를 포함해주세요
+                  </p>
+                ) : !passwordChecks?.length ? (
+                  <p className="text-gray-500">∙ 8자 이상 입력해주세요</p>
+                ) : !passwordChecks?.special ? (
+                  <p className="text-gray-500">
+                    ∙ 특수문자를 포함해주세요 (!@#$%^&amp;*(),.?":{}|&lt;&gt;)
+                  </p>
+                ) : (
+                  <p className="text-green-600 font-medium">
+                    ✓ 사용 가능한 비밀번호입니다
+                  </p>
+                )}
               </div>
-            )}
+            </div>
+
+            {/* 비밀번호 확인 */}
+            <div className="relative">
+              <span className="absolute left-3 top-2.5 sm:top-3">
+                <RiLockPasswordLine className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
+              </span>
+              <input
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm Password"
+                className="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 text-base sm:text-lg bg-transparent border-b-2 border-gray-400 focus:border-gray-600 outline-none placeholder-gray-400"
+                disabled={!isCodeVerified}
+                required
+              />
+              {formData.confirmPassword && (
+                <div className="mt-2 text-xs">
+                  {passwordMatch.isDirty &&
+                    (passwordMatch.isMatching ? (
+                      <p className="text-green-600 font-medium">
+                        ✓ 비밀번호가 일치합니다
+                      </p>
+                    ) : (
+                      <p className="text-red-500">
+                        ∙ 비밀번호가 일치하지 않습니다
+                      </p>
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* 에러 메시지 */}
@@ -387,11 +384,19 @@ const Signup = () => {
           {/* 회원가입 버튼 */}
           <button
             type="submit"
-            disabled={isRegistering}
-            className="w-full bg-Main text-white py-3 sm:py-5 rounded-md hover:bg-Main_hover transition-colors text-base sm:text-lg"
+            disabled={isRegistering || !isCodeVerified}
+            className={`w-full py-3 sm:py-5 rounded-md transition-colors text-base sm:text-lg text-white
+              ${!isCodeVerified ? 'bg-gray-400 cursor-not-allowed' : 'bg-Main hover:bg-Main_hover'}`}
           >
             {isRegistering ? "회원가입 중..." : "회원가입"}
           </button>
+
+          {/* 이메일 인증 안내 메시지 */}
+          {!isCodeVerified && (
+            <p className="text-center text-sm text-gray-600">
+              이메일 인증을 완료하시면 나머지 정보를 입력하실 수 있습니다.
+            </p>
+          )}
         </form>
       </div>
     </div>
