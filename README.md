@@ -82,7 +82,7 @@ $ npm start
   </tr>
   <tr>
     <th style="background-color: #fff; text-align: center;">AI 리포트 페이지</th>
-    <th style="background-color: #fff; text-align: center;">사건 기록 페이지</th>
+    <th style="background-color: #fff; text-align: center;">My 페이지</th>
   </tr>
   <tr>
     <td><img width="380" src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/github/%EC%BA%A1%EC%B3%905.png"/></td>
