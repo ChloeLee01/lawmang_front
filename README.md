@@ -32,7 +32,7 @@ Lawmang은 사용자가 자신의 사건을 정리하고, 쟁점을 이해하며
 
 GPT, LangChain, 벡터 검색을 활용해 기술의 복잡함은 감추고, ‘이해 중심’의 경험을 제공합니다.”
 
-
+---
 ## 🚀 시작 가이드
 ### Requirements
 For building and running the application you need:
@@ -67,7 +67,8 @@ $ npm start
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
 
-## 🖥️ 화면 구성
+---
+**🖥️ 화면 구성**
 <table>
   <tr>
     <th style="background-color: #fff; text-align: center;">메인 페이지</th>
@@ -96,7 +97,8 @@ $ npm start
 </table>
 
 
-## ✨ 주요 기능
+---
+**✨ 주요 기능**
 
 ### ✅ 챗봇 검색 기능  
 * **법률용어 검색**: 일상 속에서 접하는 생소한 법률용어를 쉽고 간단하게 설명해드립니다.  
@@ -122,7 +124,8 @@ $ npm start
 * **법률상식 유튜브 추천**: 다양한 사례와 주제를 담은 유튜브 영상으로 법률 지식을 자연스럽게 익힐 수 있습니다.
 
 
-## 📄 구성 파일
+---
+**📄 구성 파일**
 
 | 기능                   | 설명                                       | 주요 파일/디렉토리                          |
 |------------------------|--------------------------------------------|---------------------------------------------|
@@ -137,6 +140,7 @@ $ npm start
 | 정적 웹페이지 리소스     | HTML 템플릿, 파비콘, manifest 등              | `public/*`                                   |
 
 
+---
 ## 🗂️ 아키텍쳐
 ### 디렉토리 구조
 ```bash
