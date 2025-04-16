@@ -34,20 +34,32 @@ GPT, LangChain, 벡터 검색을 활용해 기술의 복잡함은 감추고, ‘
 
 ---
 ## 🚀 시작 가이드
-### Requirements
-For building and running the application you need:
+
+### 1. 요구 사항 (Requirements)
+
 - [Node.js v20.18.0](https://nodejs.org/ko/download/package-manager)
-- [Npm 10.8.2](https://www.npmjs.com/package/npm/v/9.2.0)
-### Installation
-> **Frontend**
-```markdown
-$ git clone https://github.com/ChloeLee01/lawmang_front.git
-$ cd lawmang_front
+- [npm v10.8.2](https://www.npmjs.com/package/npm/v/10.8.2)
+
+---
+
+### 2. 프로젝트 설치 및 실행
+
+#### ① 프로젝트 클론
+```bash
+git clone https://github.com/ChloeLee01/lawmang_front.git
+cd lawmang_front
 ```
+
+#### ② 패키지 설치
+```bash
+npm install
 ```
-$ npm install
-$ npm start
+
+#### ③ 개발 서버 실행
+```bash
+npm start
 ```
+
 
 ---
 ## 🧱 기술 스택
