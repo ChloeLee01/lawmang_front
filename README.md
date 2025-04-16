@@ -1,7 +1,9 @@
-<h1 align="left">
-  <img src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/Logo3.png" alt="Lawmang Logo" width="200" />
-  <span style="position: relative; top: -100px;"> Web Page v1.0</span>
-</h1>
+<p align="left">
+  <img src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/Logo3.png" alt="logo" width="40">
+</p>
+
+# Web Page v1.0
+
 
 > **코드랩 아카데미 AICC 4기 2팀**  
 > **개발기간: 2025. 01. 21 ~ 2025. 04. 15**
