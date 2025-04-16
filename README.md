@@ -1,12 +1,12 @@
 # Lawmang Project
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Seoyoung-Cheon/Lawmang/refs/heads/main/frontend/src/assets/favicon.ico" alt="Lawmang Logo1" width="100" height="100" />
-  <img src="https://raw.githubusercontent.com/ChloeLee01/lawmang_front/main/src/assets/Logo1.PNG" alt="로고" width="250" />
+  <img src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/Logo3.png" alt="Lawmang Logo1" width="500" height="200" />
+  
 </p>
 
 # Lawmang Web Page v1.0
-> **코드랩 아카데미 AICC 4기 2팀** <br/> **개발기간: 2025. 01. 22 ~ 2025. 04. 16**<br/>
+> **코드랩 아카데미 AICC 4기 2팀** <br/> **개발기간: 2025. 01. 21 ~ 2025. 04. 15**<br/>
 ## 배포 주소
 > **프론트 서버** : https://lawmang-front.vercel.app<br>
 
@@ -16,9 +16,11 @@
 
 
 ## 🏛️ 프로젝트 소개
-사람들은 법률이 더 쉽고, 투명하며, 가까운 방식으로 다가오길 기대하고 있습니다.
+“법은 여전히 어렵고 멀게 느껴집니다. 
 
-저희는 누구나 사건을 정리하고 핵심 쟁점을 파악할 수 있도록 설계하고, 기술적 신기함보다 실제 ‘이해’를 도와주는 방향으로 'Lawmang' 을 개발하였습니다.
+Lawmang은 사용자가 자신의 사건을 정리하고, 쟁점을 이해하며, 스스로 판단할 수 있도록 돕는 AI 기반 법률지원 서비스입니다. 
+
+GPT, LangChain, 벡터 검색을 활용해 기술의 복잡함은 감추고, ‘이해 중심’의 경험을 제공합니다.”
 
 
 ## 시작 가이드
@@ -26,7 +28,6 @@
 For building and running the application you need:
 - [Node.js v20.18.0](https://nodejs.org/ko/download/package-manager)
 - [Npm 10.8.2](https://www.npmjs.com/package/npm/v/9.2.0)
-- [Python 3.12.7](https://www.python.org/downloads/windows/)
 ### Installation
 > **Frontend**
 ``` Frontend
@@ -49,8 +50,6 @@ $ npm start
 ### Config
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white)
-![pip](https://img.shields.io/badge/pip-3776AB?style=for-the-badge&logo=pip&logoColor=white)
 
 ### Development
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -83,7 +82,7 @@ $ npm start
   </tr>
   <tr>
     <th style="background-color: #fff; text-align: center;">AI 리포트 페이지</th>
-    <th style="background-color: #fff; text-align: center;">마이 페이지</th>
+    <th style="background-color: #fff; text-align: center;">My 페이지</th>
   </tr>
   <tr>
     <td><img width="380" src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/github/%EC%BA%A1%EC%B3%905.png"/></td>
@@ -93,20 +92,29 @@ $ npm start
 
 
 ## 📄 주요 기능
-### ✅ 챗봇 검색 기능
-* **법률용어 검색**: 일상 속에서 접하는 생소한 법률용어를 쉽고 간단하게 설명해드립니다. <br>
-* **간단한 법률 상담**: 사용자 질문을 바탕으로 관련 법률 정보를 안내해드립니다.
 
-### ✅ 판례 요약보기 기능
-* **판례 요약 보기**: 복잡한 판례를 AI가 핵심만 정리해줘 한눈에 내용을 파악할 수 있습니다. <br>
+### ✅ 챗봇 검색 기능  
+* **법률용어 검색**: 일상 속에서 접하는 생소한 법률용어를 쉽고 간단하게 설명해드립니다.  
+* **법률 상담**: 사용자 질문을 바탕으로 관련 법률 정보를 안내해드립니다.
 
-### ✅ 법률 서식 미리보기 및 다운로드
-* **서식 미리보기**: 필요한 법률 서식을 다운로드하기 전, 미리보기 모달에서 내용을 확인할 수 있습니다. <br>
+### ✅ 판례 검색 및 요약 보기 기능  
+* **판례 검색**: 키워드를 입력하면 관련 판례를 빠르게 검색할 수 있습니다.  
+* **판례 요약 보기**: 복잡한 판례를 AI가 핵심만 정리해줘 한눈에 내용을 파악할 수 있습니다.
+
+### ✅ 상담사례 검색 기능  
+* **상담사례 검색**: 실제 상담 데이터를 기반으로 유사한 사례를 찾아볼 수 있어, 자신의 상황과 비교해볼 수 있습니다.
+
+### ✅ 법률 서식 미리보기 및 다운로드  
+* **서식 미리보기**: 필요한 법률 서식을 다운로드하기 전, 미리보기 모달에서 내용을 확인할 수 있습니다.  
 * **서식 다운로드**: 필요한 서식을 파일로 내려받아 직접 활용할 수 있습니다.
 
-### ✅ 메모 작성 및 열람 목록 기능
-* **메모 작성**: 중요한 법률용어나 상담 내용을 마이페이지에서 직접 정리하고 저장할 수 있습니다. <br>
+### ✅ 메모 작성 및 열람 목록 기능  
+* **메모 작성**: 중요한 법률용어나 상담 내용을 마이페이지에서 직접 정리하고 저장할 수 있습니다.  
 * **열람 목록**: 최근에 확인한 법률 정보나 상담 사례를 자동으로 기록하여 다시 쉽게 찾아볼 수 있습니다.
+
+### ✅ 법률상식 콘텐츠 제공  
+* **법률 카드뉴스**: 자주 접하는 법률 상황을 카드뉴스 형식으로 쉽고 빠르게 이해할 수 있습니다.  
+* **법률상식 유튜브 추천**: 다양한 사례와 주제를 담은 유튜브 영상으로 법률 지식을 자연스럽게 익힐 수 있습니다.
 
 
 ---
