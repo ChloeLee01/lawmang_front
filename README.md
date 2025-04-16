@@ -1,6 +1,6 @@
 <h1 align="left">
   <img src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/Logo3.png" alt="Lawmang Logo" width="200" />
-  <span style="position: relative; top: -10px;"> Web Page v1.0</span>
+  <span style="position: relative; top: -100px;"> Web Page v1.0</span>
 </h1>
 
 > **코드랩 아카데미 AICC 4기 2팀**  
