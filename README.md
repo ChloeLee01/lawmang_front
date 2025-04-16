@@ -40,7 +40,7 @@ For building and running the application you need:
 - [Npm 10.8.2](https://www.npmjs.com/package/npm/v/9.2.0)
 ### Installation
 > **Frontend**
-``` Frontend
+```markdown
 $ git clone https://github.com/ChloeLee01/lawmang_front.git
 $ cd lawmang_front
 ```
@@ -67,7 +67,6 @@ $ npm start
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
 
----
 ## 🖥️ 화면 구성
 <table>
   <tr>
@@ -97,7 +96,6 @@ $ npm start
 </table>
 
 
----
 ## ✨ 주요 기능
 
 ### ✅ 챗봇 검색 기능  
@@ -124,7 +122,6 @@ $ npm start
 * **법률상식 유튜브 추천**: 다양한 사례와 주제를 담은 유튜브 영상으로 법률 지식을 자연스럽게 익힐 수 있습니다.
 
 
----
 ## 📄 구성 파일
 
 | 기능                   | 설명                                       | 주요 파일/디렉토리                          |
@@ -140,7 +137,6 @@ $ npm start
 | 정적 웹페이지 리소스     | HTML 템플릿, 파비콘, manifest 등              | `public/*`                                   |
 
 
----
 ## 🗂️ 아키텍쳐
 ### 디렉토리 구조
 ```bash
