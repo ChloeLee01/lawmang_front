@@ -17,7 +17,6 @@
 > **프론트 서버** : https://lawmang-front.vercel.app<br>
 > **백엔드 깃허브 주소** : https://github.com/hyeonji423/lawmang_back
 
-## 목차
 
 ## 📚 목차
 
