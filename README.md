@@ -3,15 +3,18 @@
 > **코드랩 아카데미 AICC 4기 2팀**  
 > **개발기간: 2025. 01. 21 ~ 2025. 04. 15**
 
+<br>
 
 ## 👩‍👩‍👧‍👦 웹개발팀 소개
 > **이영선**, **황현지**, **천서영**, **박준호**, **김용주**
 
+<br>
 
 ## 배포 주소
 > **프론트 서버** : https://lawmang-front.vercel.app<br>
 > **백엔드 깃허브 주소** : https://github.com/hyeonji423/lawmang_back
 
+<br>
 
 ## 📚 목차
 
@@ -23,8 +26,8 @@
 - [📄 구성 파일](#-구성-파일)
 - [🗂️ 아키텍쳐](#-아키텍쳐)
 
+<br>
 
----
 ## 🏛️ 프로젝트 소개
 “법은 여전히 어렵고 멀게 느껴집니다. 
 
@@ -32,7 +35,8 @@ Lawmang은 사용자가 자신의 사건을 정리하고, 쟁점을 이해하며
 
 GPT, LangChain, 벡터 검색을 활용해 기술의 복잡함은 감추고, ‘이해 중심’의 경험을 제공합니다.”
 
----
+<br>
+
 ## 🚀 시작 가이드
 
 ### 1. 요구 사항 (Requirements)
@@ -40,7 +44,7 @@ GPT, LangChain, 벡터 검색을 활용해 기술의 복잡함은 감추고, ‘
 - [Node.js v20.18.0](https://nodejs.org/ko/download/package-manager)
 - [npm v10.8.2](https://www.npmjs.com/package/npm/v/10.8.2)
 
----
+<br>
 
 ### 2. 프로젝트 설치 및 실행
 
@@ -60,8 +64,8 @@ npm install
 npm start
 ```
 
+<br>
 
----
 ## 🧱 기술 스택
 
 ### Development
@@ -78,8 +82,8 @@ npm start
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
+<br>
 
----
 ## 🖥️ 화면 구성
 <table>
   <tr>
@@ -108,8 +112,8 @@ npm start
   </tr>
 </table>
 
+<br>
 
----
 ## ✨ 주요 기능
 
 ### 1️ 챗봇 검색 기능  
@@ -135,8 +139,8 @@ npm start
 * **법률 카드뉴스**: 자주 접하는 법률 상황을 카드뉴스 형식으로 쉽고 빠르게 이해할 수 있습니다.  
 * **법률상식 유튜브 추천**: 다양한 사례와 주제를 담은 유튜브 영상으로 법률 지식을 자연스럽게 익힐 수 있습니다.
 
+<br>
 
----
 ## 📄 구성 파일
 
 | 기능                   | 설명                                       | 주요 파일/디렉토리                          |
@@ -151,8 +155,8 @@ npm start
 | 스타일 및 설정           | Tailwind 설정, 전역 스타일, 린트 설정         | `tailwind.config.js`, `index.css`, `.eslintrc.js` |
 | 정적 웹페이지 리소스     | HTML 템플릿, 파비콘, manifest 등              | `public/*`                                   |
 
+<br>
 
----
 ## 🗂️ 아키텍쳐
 ### 디렉토리 구조
 
