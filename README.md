@@ -159,58 +159,58 @@ npm start
 ```
 frontend/                   # 프론트엔드 프로젝트 루트
 │
-├── package.json           # 프로젝트 의존성 및 실행 스크립트
-├── tailwind.config.js     # TailwindCSS 설정
-├── README.md              # 프로젝트 설명 문서
-│
 ├── public/                # 정적 파일 및 HTML 템플릿
 │   ├── template_pdfs/     # 법률 서식 PDF 템플릿
 │   ├── favicon.ico        # 파비콘
 │   ├── index.html         # 메인 HTML
 │   └── manifest.json      # 웹 앱 매니페스트
 │
-└── src/                   # 소스 코드 루트
-    ├── assets/            # 이미지, 동영상 등 정적 리소스
-    │   ├── github/
-    │   ├── template/
-    │   ├── icon-180.png
-    │   ├── loading.gif
-    │   ├── Logo1.PNG
-    │   ├── main.video.mp4
-    │   └── open_license.jpg
-    │
-    ├── chatbot/           # 챗봇 관련 컴포넌트
-    │   ├── Chatbot_test/
-    │   └── Chatbot.jsx
-    │
-    ├── components/        # 페이지별 주요 UI 컴포넌트 모음
-    │   ├── AIReport/
-    │   ├── Auth/
-    │   ├── Consultation/
-    │   ├── MyLog/
-    │   ├── Precedent/
-    │   ├── Template/
-    │   └── HighlightText.jsx
-    │
-    ├── constants/         # 프론트에서 사용하는 고정 데이터
-    │   ├── cardnewsdata.js
-    │   ├── document_structure.json
-    │   └── FAQdata.js
-    │
-    ├── Home/              # 메인 화면 UI 컴포넌트
-    │   ├── CardList.jsx
-    │   ├── Cardnews.jsx
-    │   ├── FAQ.jsx
-    │   ├── Footer.jsx
-    │   ├── Header.jsx
-    │   ├── Main.jsx
-    │   └── Youtube.jsx
-    │
-    ├── redux/             # 전역 상태 관리 (Redux)
-    │   ├── slices/
-    │   └── store.js
-    │
-    ├── App.js             # 최상위 라우터 컴포넌트
-    ├── index.js           # React 앱 진입점
-    └── index.css          # 전역 스타일 정의
+├── src/                   # 소스 코드 루트
+│   ├── assets/            # 이미지, 동영상 등 정적 리소스
+│   │   ├── github/
+│   │   ├── template/
+│   │   ├── icon-180.png
+│   │   ├── loading.gif
+│   │   ├── Logo1.PNG
+│   │   ├── main.video.mp4
+│   │   └── open_license.jpg
+│
+│   ├── chatbot/           # 챗봇 관련 컴포넌트
+│   │   ├── Chatbot_test/
+│   │   └── Chatbot.jsx
+│
+│   ├── components/        # 페이지별 주요 UI 컴포넌트 모음
+│   │   ├── AIReport/
+│   │   ├── Auth/
+│   │   ├── Consultation/
+│   │   ├── MyLog/
+│   │   ├── Precedent/
+│   │   ├── Template/
+│   │   └── HighlightText.jsx
+│
+│   ├── constants/         # 프론트에서 사용하는 고정 데이터
+│   │   ├── cardnewsdata.js
+│   │   ├── document_structure.json
+│   │   └── FAQdata.js
+│
+│   ├── Home/              # 메인 화면 UI 컴포넌트
+│   │   ├── CardList.jsx
+│   │   ├── Cardnews.jsx
+│   │   ├── FAQ.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── Main.jsx
+│   │   └── Youtube.jsx
+│
+│   ├── redux/             # 전역 상태 관리 (Redux)
+│   │   ├── slices/
+│   │   └── store.js
+│
+│   ├── App.js             # 최상위 라우터 컴포넌트
+│   ├── index.js           # React 앱 진입점
+│   └── index.css          # 전역 스타일 정의
+│
+├── package.json           # 프로젝트 의존성 및 실행 스크립트
+├── tailwind.config.js     # TailwindCSS 설정
+└── README.md              # 프로젝트 설명 문서
 ```
