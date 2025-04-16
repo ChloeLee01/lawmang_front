@@ -1,12 +1,5 @@
-# Lawmang Project
-
-<p align="center">
-  <img src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/Logo3.png" alt="Lawmang Logo1" width="500" height="200" />
-  
-</p>
-
-# Lawmang Web Page v1.0
-> **코드랩 아카데미 AICC 4기 2팀** <br/> **개발기간: 2025. 01. 21 ~ 2025. 04. 15**<br/>
+### <img src="https://github.com/ChloeLee01/lawmang_front/blob/main/src/assets/Logo3.png" alt="Lawmang Logo Small" width="20" height="20" /> Lawmang Web Page v1.0  
+> **코드랩 아카데미 AICC 4기 2팀** <br/> **개발기간: 2025. 01. 21 ~ 2025. 04. 15**
 
 
 ## 👩‍👩‍👧‍👦 웹개발팀 소개
